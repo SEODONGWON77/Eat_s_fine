@@ -21,7 +21,9 @@ const StyledHeaderLink = styled(Link)`
   text-decoration: none;
   line-height: 80px;
   padding-right: 10px;
-
+  &:hover{
+    color: red;
+  }
 `;
 
 function Header(props) {
@@ -38,23 +40,23 @@ function Header(props) {
     });
   };
 
-  return (
-    <div>
-      <h1>header입니다.</h1>
+  if (user.userData && !user.userData.isAuth) {
+    return (
       <StyledHeaderDiv>
         <StyledHeaderLink to="/">Home</StyledHeaderLink>
-        {user.userData && !user.userData.isAuth ? (
-          <StyledHeaderDiv>
-            <StyledHeaderLink to="/login">로그인</StyledHeaderLink>
-            <StyledHeaderLink to="/register">회원가입</StyledHeaderLink>
-          </StyledHeaderDiv>
-        ) : (
-          <StyledHeaderLink onClick={logoutHandler}>로그아웃</StyledHeaderLink>
-        )}
+        <StyledHeaderLink to="/login">로그인</StyledHeaderLink>
+        <StyledHeaderLink to="/register">회원가입</StyledHeaderLink>
       </StyledHeaderDiv>
-      <hr />
-    </div>
-  );
+    );
+  } else {
+    return (
+      <StyledHeaderDiv>
+        <StyledHeaderLink to="/">Home</StyledHeaderLink>
+        <StyledHeaderLink to="/upload">업로드</StyledHeaderLink>
+        <StyledHeaderLink onClick={logoutHandler}>로그아웃</StyledHeaderLink>
+      </StyledHeaderDiv>
+    );
+  }
 }
 
 export default Header;
