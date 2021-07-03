@@ -22,6 +22,9 @@ mongoose.connect(config.mongoURI, {
   .catch((err) => console.log(err));
 
 app.use("/api/users", require("./routes/users"));
+app.use("/api/upload", require("./routes/upload"));
+app.use('/uploads_folder', express.static('uploads_folder')); //썸네일 안뜨는경우 해결방법 , client에서  back서버에 있는 static한 파일들을 (이미지, css 파일, javascript 파일) 처리
+app.use('/upload/thumbnail', express.static('/upload/thumbnail'));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

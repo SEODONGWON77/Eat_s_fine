@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 
+
+
 const StyledIconDiv = styled.div`
   width: 300px;
   height: 240px;
@@ -36,6 +38,9 @@ function VideoUpload() {
   const [Private, setPrivate] = useState("Private");
   const [Category, setCategory] = useState("Film & animation");
   const [Icon, setIcon] = useState(faFileUpload);
+  const [FilePath, setFilePath] = useState("");
+  const [Duration, setDuration] = useState("");
+  const [ThumbnailPath, setThumbnailPath] = useState("");
 
   const onChangeTitle = (e) => {
     setVideoTitle(e.currentTarget.value);
@@ -62,15 +67,34 @@ function VideoUpload() {
     const config = {
       header: { "contnet-type": "multipart/form-data" },
     };
+
     formData.append("file", files[0]);
     console.log("업로드한것 : ", files);
-    Axios.post("/api/video/uploadfiles", formData, config)
-      .then((response) => {
-        if (response.data.success) {
-        } else {
-          alert("업로드 실패");
-        }
-      });
+
+    Axios.post("/api/upload/contents", formData, config).then((response) => {
+      if (response.data.success) {
+        let variable = {
+          //서버에서 받은(response.data) 경로, 파일이름
+          url: response.data.url,
+          fileName: response.data.fileName,
+        };
+
+        setFilePath(response.data.url);
+
+        Axios.post("/api/upload/thumbnail", variable).then((response) => {
+          if (response.data.success) {
+            console.log('11111',response.data);
+
+            setDuration(response.data.fileDuration);
+            setThumbnailPath(response.data.url);
+          } else {
+            alert("썸네일 생성 실패");
+          }
+        });
+      } else {
+        alert("업로드 실패");
+      }
+    });
   };
 
   return (
@@ -90,10 +114,12 @@ function VideoUpload() {
           </Dropzone>
 
           {/* Thumbnail */}
-          <div>
-            이미지
-            <img src="" alt=""></img>
-          </div>
+          {ThumbnailPath && (
+            <div>
+              <img
+                src={`http://localhost:5000/${ThumbnailPath}`} alt="thumbnail"/>
+            </div>
+          )}
         </div>
         <br />
         <br />
