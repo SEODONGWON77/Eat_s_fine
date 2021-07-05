@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { auth } = require('../models/middleware/auth');
+const { auth } = require('../middleware/auth');
 const { User } = require('../models/User');
 
 //auth라는 미들웨어 : 요청(get)받았을 때 콜백함수 하기전에 중간에서 실행
@@ -18,6 +18,7 @@ router.get("/auth", auth, (req, res) => {
     image: req.user.image,
   });
 });
+
 
 router.post("/register", (req, res) => {
   const user = new User(req.body); //req.body로 json형식으로 파싱

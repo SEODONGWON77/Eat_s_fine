@@ -3,7 +3,7 @@ const app = express();
 const port = 5000;
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
-const { auth } = require("./models/middleware/auth");
+const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 
 app.use(express.json()); //json 형태로 parsing //application/json
