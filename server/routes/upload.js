@@ -17,7 +17,7 @@ let storage = multer.diskStorage({
     const extension = path.extname(file.originalname); // extention 확장자
     if (extention !== ".mp4" || extention !== ".jpg" || extention !== ".png") {
       return cb(
-        res.status(400).end("jpg, png, mp3, mp4 만 업로드 가능합니다."),
+        res.status(400).end("jpg, png, mp4 만 업로드 가능합니다."),
         false
       );
     }
@@ -68,7 +68,7 @@ router.get("/getFiles", (req, res) => {
 });
 
 router.post("/getFileDetail", (req, res) => {
-  File.findOne({ "_id ": req.body.postId })
+  File.findOne({ "_id": req.body.fileId}) //"_id" 스페이스바 주의하자!!!!!    "_id " (X)
     .populate("writer")
     .exec((err, fileDetail) => {
       if (err) return res.status(400).send(err);

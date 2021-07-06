@@ -59,10 +59,6 @@ function FileUpload(props) {
     setCategory(e.currentTarget.value);
   };
 
-  const onMouseOverIcon = (e) => {
-    setIcon(faFileUpload);
-  };
-
   const onDrop = (files) => {
     let formData = new FormData();
     const config = {
@@ -83,7 +79,10 @@ function FileUpload(props) {
         const fileName = response.data.url;
         const fileNameLength = fileName.length;
         const fileNameLastDot = fileName.lastIndexOf(".");
-        const fileExtension = fileName.substring(fileNameLastDot + 1, fileNameLength);
+        const fileExtension = fileName.substring(
+          fileNameLastDot + 1,
+          fileNameLength
+        );
         setExtentionType(fileExtension);
 
         setFilePath(response.data.url);
@@ -115,7 +114,7 @@ function FileUpload(props) {
       category: Category,
       duration: Duration,
       thumbnail: ThumbnailPath,
-      extentionType : ExtentionType
+      extentionType: ExtentionType,
     };
     Axios.post("/api/upload/file", variable).then((response) => {
       if (response.data.success) {
@@ -156,6 +155,8 @@ function FileUpload(props) {
             </div>
           )}
         </div>
+        <label>Type</label>
+        <div>{ExtentionType !== "mp4" ? <p>이미지</p> : <p>비디오</p>}</div>
         <br />
         <br />
         <label>Title</label>

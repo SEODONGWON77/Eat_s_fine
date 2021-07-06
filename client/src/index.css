@@ -12,26 +12,18 @@ code {
     monospace;
 }
 
-.duration {
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  margin: 4px;
-  color: #fff;
-  background-color: rgba(17, 17, 17, 0.8);
-  opacity: 0.8;
-  padding: 2px 4px;
-  border-radius: 2px;
-  letter-spacing: 0.5px;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 12px;
-}
-
-.explain-container {
-  position: relative;
-  margin-top: auto;
-  float: left;
-  width: 25%;
- 
+/* @media screen and (max-width: 992px) {
+  .responseDiv div {
+    float: left;
+    width: 50%;
+  }
+} */
+@media screen and (max-width: 768px) {
+  .responseDiv div {
+    float: none;
+    width: 25rem;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: flex-end;
+  }
 }

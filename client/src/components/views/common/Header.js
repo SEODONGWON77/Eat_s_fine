@@ -5,13 +5,17 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledHeaderDiv = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
   display: flex;
-  height: 80px;
+  height: 60px;
   background-color: black;
   ul {
     list-style: none;
   }
-  display: flex;
   justify-content: flex-end;
 `;
 const StyledHeaderLink = styled(Link)`
@@ -19,14 +23,14 @@ const StyledHeaderLink = styled(Link)`
   color: white;
   font-size: 20px;
   text-decoration: none;
-  line-height: 80px;
+  line-height: 60px;
   padding-right: 10px;
-  &:hover{
+  &:hover {
     color: red;
   }
 `;
 
-function Header(props) {
+function Header() {
   const user = useSelector((state) => state.user);
 
   const logoutHandler = () => {

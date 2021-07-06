@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/login" component={Auth(Login, false)} />
           <Route exact path="/register" component={Auth(Register, false)} />
           <Route exact path="/upload" component={Auth(FileUpload, true)} />
-          <Route exact path="/file/:id" component={Auth(FileDetail, null)} />
+          <Route exact path="/video/:fileId" component={FileDetail} />
         </Switch>
         <Footer />
       </Suspense>
