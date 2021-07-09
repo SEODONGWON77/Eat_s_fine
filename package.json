@@ -1,6 +1,7 @@
 {
   "name": "react-project",
   "version": "1.0.0",
+  "homepage": "./",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -11,7 +12,8 @@
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently  \"npm run backend \"  \"npm run start --prefix client\""
+    "dev": "concurrently  \"npm run backend \"  \"npm run start --prefix client\"",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +36,8 @@
     "mongoose": "^5.12.12",
     "multer": "^1.4.2",
     "nodemon": "^2.0.7",
+    "react-icons": "^4.2.0",
+    "react-responsive": "^8.2.0",
     "sharp": "^0.28.3",
     "styled-components": "^4.4.1"
   }
